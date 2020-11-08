@@ -137,6 +137,22 @@ public:
 		}
 		return M;
 	}
+	Matrix transpose()
+	{
+		Matrix M(this->columns, this->rows, {});
+		M.arr.resize(this->columns);
+		int col = 0;
+		for (int i = 0; i < this->rows; i++)
+		{
+			for (int j = 0; j < this->columns; j++)
+			{
+				M.arr[col].push_back(this->arr[i][j]);
+				col++;
+			}
+			col=0;
+		}
+		return M;
+	}
 	friend ostream& operator << (ostream&, const Matrix&);
 };
 ostream& operator << (ostream& o, const Matrix& m)
@@ -186,8 +202,6 @@ void parse(vector<vector<Complex>>& arr, string s)
 }
 int main()
 {
-	cout << fixed;
-	cout << setprecision(3);
 	cout << "Hello!" << endl;
 	cout << "Please Enter the Matrix" << endl;
 	string s;
@@ -312,6 +326,10 @@ int main()
 			{
 				cout << e.what();
 			}
+		}
+		case 't':
+		{
+			cout<<M1.transpose();
 		}
 	}
 	return 0;
